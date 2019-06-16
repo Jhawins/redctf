@@ -11,10 +11,16 @@ export default class ChallengeStatus extends Component {
 
   getChallengeRows() {
     const categories = this.store.appState.categories;
-    const challengeRows = this.store.appState.challenges.map((challenge) => {
+    const sortedRows = this.store.appState.challenges.sort((a, b) => {
+      if (a.category === b.category) {
+        return a.points - b.points;
+      }
+      return b.category - a.category;
+    });
+    const challengeRows = sortedRows.map((challenge) => {
       const categoryName = categories.filter((cat) => {
         if (cat.sid === challenge.category) {
-          return cat;
+          return cat; 
         }
       });
 
