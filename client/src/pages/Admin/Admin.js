@@ -51,7 +51,8 @@ export default class Admin extends Component {
     this.setState({
       show: newShow,
       showBackBtn: false,
-      showBackState: ''
+      showBackState: '',
+      activeChildFeature: ''
     });
 
     console.log(this.state);
@@ -174,11 +175,13 @@ export default class Admin extends Component {
   //     event.preventDefault();
   //   }
   // }
+ 
 
-  callbackFunction = (childShowBackBtn, childBackState) => {
+  callbackFunction = (childShowBackBtn, childBackState, activeChildFeature) => {
     this.setState({
       showBackBtn: childShowBackBtn,
-      showBackState: childBackState
+      showBackState: childBackState,
+      activeChildFeature
     });
   }
 
@@ -247,7 +250,10 @@ export default class Admin extends Component {
 
           {this.state.show === 'challenges' && 
             <div className='challenges'>
-              <Challenges parentCallback={this.callbackFunction}/>
+              <Challenges
+                parentCallback={this.callbackFunction}
+                activeChildFeature={this.state.activeChildFeature}
+              />
             </div>
           }
 

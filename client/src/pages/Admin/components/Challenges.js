@@ -12,26 +12,21 @@ export default class Challenges extends Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
-    this.state = {
-      show: 'home'
-    };
   }
 
-  onUseFeature(ele) {
-    this.setState({
-      show: ele
-    });
-
-    this.props.parentCallback(true, 'challenges');
+  onUseFeature(activeFeature) {
+    this.props.parentCallback(true, 'challenges', activeFeature);
   }
 
 
   render() {
+    const {activeFeature} = this.props;
+
     return (
       <div className="page posts">
         <div className='admin-section'>
 
-          {this.state.show === 'home' && 
+          {activeFeature === 'home' && 
             <div className='admin-box-section'>
               <div onClick={() => this.onUseFeature('edit')}>
                 <AdminBox title='Edit Challenge' 
@@ -47,13 +42,13 @@ export default class Challenges extends Component {
             </div>
           }
 
-          {this.state.show === 'edit' && 
+          {activeFeature === 'edit' && 
             <div className='edit'>
               Edit
             </div>
           }
 
-          {this.state.show === 'create' && 
+          {activeFeature === 'create' && 
             <div className='create'>
               Create Challenge
             </div>
